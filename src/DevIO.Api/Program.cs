@@ -36,6 +36,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHsts();
+}
+
+app.UseHsts();
 
 app.UseAuthentication();
 app.UseWebApiConfig();
