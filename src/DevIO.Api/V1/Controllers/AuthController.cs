@@ -4,7 +4,6 @@ using DevIO.Business.Intefaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -12,7 +11,8 @@ using static DevIO.Api.ViewModels.LoginUserViewModel;
 
 namespace DevIO.Api.Controllers
 {
-    [Route("api/Conta")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/Conta")]
     public class AuthController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
