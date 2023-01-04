@@ -8,15 +8,34 @@ namespace DevIO.Api.V2.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class TesteVersionamentoController : MainController
     {
-        public TesteVersionamentoController(INotificador notificador, IUser appUser)
+        private readonly ILogger _logger;
+
+        public TesteVersionamentoController(
+            INotificador notificador,
+            IUser appUser,
+            ILogger<TesteVersionamentoController> logger)
             : base(notificador, appUser)
         {
+            _logger = logger;
         }
 
+        //[HttpGet]
+        //public string WhatVersion()
+        //{
+        //    return "V2";
+        //}
+
         [HttpGet]
-        public string WhatVersion()
+        public void Logs()
         {
-            return "V2";
+            //throw new Exception("Error");
+
+            _logger.LogTrace("Log de Trace");
+            _logger.LogDebug("Log de Debug");
+            _logger.LogInformation("Log de Informação");
+            _logger.LogWarning("Log de Aviso");
+            _logger.LogError("Log de Erro");
+            _logger.LogCritical("Log de Problema Critico");
         }
     }
 }

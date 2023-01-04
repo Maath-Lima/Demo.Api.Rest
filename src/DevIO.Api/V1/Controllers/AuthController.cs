@@ -18,17 +18,20 @@ namespace DevIO.Api.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
+        private readonly ILogger _logger;
 
         public AuthController(
             INotificador notificador,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             AppSettings appSettings,
-            IUser user) : base(notificador, user)
+            IUser user,
+            ILogger<AuthController> logger) : base(notificador, user)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings;
+            _logger = logger;
         }
 
         [HttpPost("registrar")]
@@ -78,6 +81,7 @@ namespace DevIO.Api.Controllers
 
             if (result.Succeeded)
             {
+                _logger.LogInformation("Usuário {@email} logado com sucesso", loginUserViewModel.Email);
                 return CustomResponse(await GerarJWT(loginUserViewModel.Email));
             }
 

@@ -25,6 +25,8 @@ builder.Services.ResolveDependencies();
 
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddLoggingConfig(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure
@@ -36,5 +38,7 @@ app.UseApiConfig(app.Environment);
 var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
 app.UseSwaggerConfig(apiVersionDescriptionProvider);
+
+app.UseLoggingConfiguration();
 
 app.Run();
